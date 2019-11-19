@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src=""></script>
+</head>
+<body>
+
+	<ul class="topnav">
+	  <li><a href="mm-home.html">Home</a></li>
+	  <li><a href="#">Multimedia Gambar</a></li>
+	  <li><a href="mm-animasi.html">Multimedia Animasi</a></li>
+	  <li><a class="active" href="#">Multimedia Audio</a></li>
+	  <li><a href="mm-video.html">Multimedia Video</a></li>
+	  <li class="right"><a href="mm-video.html">Profil</a></li>
+	</ul>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12" align="center">
+				<h3 style="text-align: center;">Audio Musik</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12" align="center">
+				<p style="font-weight: bold; font-size: 17pt; color: #0000ff;">Musik yang dimainkan:</p>
+				<p id="judul" style="font-size: 12pt; color: #ff0000"><i></i></p>
+				<button id="play" class="btn btn-danger">Play</button>
+				<button id="pause" class="btn btn-danger">Pause</button>
+				<button id="volup" class="btn btn-danger">Volume Up</button>
+				<button id="voldown" class="btn btn-danger">Volume Down</button>
+				<button id="mute" class="btn btn-danger">Mute</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12" align="center">
+				<h4>Daftar Lagu</h4>
+				<a id="lagu-1" style="color: #000066" href="#">1. George Benson - Nothing's Gonna Change My Love For You</a><br>
+				<a id="lagu-2" style="color: #000066" href="#">2. George Michael - Careless Whisper</a><br>
+				<a id="lagu-3" style="color: #000066" href="#">3. Raiko - Alive</a><br>
+				<a id="lagu-4" style="color: #000066" href="#">4. Bensound - The Jazz Piano</a><br>
+				<a id="lagu-5" style="color: #000066" href="#">5. Billie Eilish - Bad Guy</a><br>
+				<a id="lagu-6" style="color: #000066" href="#">6. Squidward - 4 Lembar</a><br>
+			</div>
+		</div>
+		<audio id="musik1">
+			<source src="Music/George Benson - Nothing's Gonna Change My Love For You.mp3">
+		</audio>
+		<audio id="musik2">
+			<source src="Music/George Michael - Careless Whisper (Official Video).ogg">
+		</audio>
+		<audio id="musik3">
+			<source src="Music/Alive - Naruto Lyrics.mp3">
+		</audio>
+		<audio id="musik4">
+			<source src="Music/bensound-thejazzpiano.mp3">
+		</audio>
+		<audio id="musik5">
+			<source src="Music/bad guy - Billie Eilish (Lyrics) 🎵.mp3">
+		</audio>
+		<audio id="musik6">
+			<source src="Music/Squidward Aku Butuh 4 Lembar [Spongebob Bahasa Indonesia].wav">
+		</audio>
+	</div>	
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	let judul = document.getElementById('judul')
+
+	let lagu1 = document.getElementById('lagu-1')
+	let lagu2 = document.getElementById('lagu-2')
+	let lagu3 = document.getElementById('lagu-3')
+	let lagu4 = document.getElementById('lagu-4')
+	let lagu5 = document.getElementById('lagu-5')
+	let lagu6 = document.getElementById('lagu-6')
+
+	let musik1 = document.getElementById('musik1')
+	let musik2 = document.getElementById('musik2')
+	let musik3 = document.getElementById('musik3')
+	let musik4 = document.getElementById('musik4')
+	let musik5 = document.getElementById('musik5')
+	let musik6 = document.getElementById('musik6')
+
+	let tombolplay = document.getElementById('play')
+	let tombolpause = document.getElementById('pause')
+	let tombolvolumeup = document.getElementById('volup')
+	let tombolvolumedown = document.getElementById('voldown')
+	let tombolmute = document.getElementById('mute')
+
+	let mainmusik
+
+	let stopmusik = function() {
+		musik1.pause()
+		musik1.currentTime = 1
+		musik2.pause()
+		musik2.currentTime = 1
+		musik3.pause()
+		musik3.currentTime = 1
+		musik4.pause()
+		musik4.currentTime = 1
+		musik5.pause()
+		musik5.currentTime = 1
+		musik6.pause()
+		musik6.currentTime = 1
+	}
+
+	let resetvolume = function() {
+		musik1.volume = 1
+		musik2.volume = 1
+		musik3.volume = 1
+		musik4.volume = 1
+		musik5.volume = 1
+		musik6.volume = 1
+	}
+
+	lagu1.addEventListener('click', function() {
+		stopmusik()
+		resetvolume()
+		musik1.play()
+		judul.innerText = `1. George Benson - Nothing's Gonna Change My Love For You`
+		mainmusik = 1
+	})
+
+	lagu2.addEventListener('click', function() {
+		stopmusik()
+		resetvolume()
+		musik2.play()
+		judul.innerText = `2. George Michael - Careless Whisper`
+		mainmusik = 2
+	})
+
+	lagu3.addEventListener('click', function() {
+		stopmusik()
+		resetvolume()
+		musik3.play()
+		judul.innerText = `3. Raiko - Alive`
+		mainmusik = 3
+	})
+
+	lagu4.addEventListener('click', function() {
+		stopmusik()
+		resetvolume()
+		musik4.play()
+		judul.innerText = `4. Bensound - The Jazz Piano`
+		mainmusik = 4
+	})
+
+	lagu5.addEventListener('click', function() {
+		stopmusik()
+		resetvolume()
+		musik5.play()
+		judul.innerText = `5. Billie Eilish - Bad Guy`
+		mainmusik = 5
+	})
+
+	lagu6.addEventListener('click', function() {
+		stopmusik()
+		resetvolume()
+		musik6.play()
+		judul.innerText = `6. Squidward - 4 Lembar`
+		mainmusik = 6
+	})
+
+	tombolpause.addEventListener('click', function() {
+		if (mainmusik == 1) {
+			musik1.pause()
+		} else if (mainmusik == 2) {
+			musik2.pause()
+		} else if (mainmusik == 3) {
+			musik3.pause()
+		} else if (mainmusik == 4) {
+			musik4.pause()
+		} else if (mainmusik == 5) {
+			musik5.pause()
+		} else if (mainmusik == 6) {
+			musik6.pause()
+		}
+	})
+
+	tombolplay.addEventListener('click', function() {
+		if (mainmusik == 1) {
+			musik1.play()
+		} else if (mainmusik == 2) {
+			musik2.play()
+		} else if (mainmusik == 3) {
+			musik3.play()
+		} else if (mainmusik == 4) {
+			musik4.play()
+		} else if (mainmusik == 5) {
+			musik5.play()
+		} else if (mainmusik == 6) {
+			musik6.play()
+		}
+	})
+
+	tombolvolumeup.addEventListener('click', function() {
+		if (mainmusik == 1) {
+			if (musik1.volume < 1) {
+				musik1.volume += 0.1
+			}
+		} else if (mainmusik == 2) {
+			if (musik2.volume < 1) {
+				musik2.volume += 0.1
+			}
+		} else if (mainmusik == 3) {
+			if (musik3.volume < 1) {
+				musik3.volume += 0.1
+			}
+		} else if (mainmusik == 4) {
+			if (musik4.volume < 1) {
+				musik4.volume += 0.1
+			}
+		} else if (mainmusik == 5) {
+			if (musik5.volume < 1) {
+				musik5.volume += 0.1
+			}
+		} else if (mainmusik == 6) {
+			if (musik6.volume < 1) {
+				musik6.volume += 0.1
+			}
+		}
+	})
+
+	tombolvolumedown.addEventListener('click', function() {
+		if (mainmusik == 1) {
+			if (musik1.volume < 1) {
+				musik1.volume -= 0.1
+			}
+		} else if (mainmusik == 2) {
+			if (musik2.volume < 1) {
+				musik2.volume -= 0.1
+			}
+		} else if (mainmusik == 3) {
+			if (musik3.volume < 1) {
+				musik3.volume -= 0.1
+			}
+		} else if (mainmusik == 4) {
+			if (musik4.volume < 1) {
+				musik4.volume -= 0.1
+			}
+		} else if (mainmusik == 5) {
+			if (musik5.volume < 1) {
+				musik5.volume -= 0.1
+			}
+		} else if (mainmusik == 6) {
+			if (musik6.volume < 1) {
+				musik6.volume -= 0.1
+			}
+		}
+	})
+
+	tombolmute.addEventListener('click', function() {
+		if (mainmusik == 1) {
+			musik1.volume = 0
+		} else if (mainmusik == 2) {
+			musik2.volume = 0
+		} else if (mainmusik == 3) {
+			musik3.volume = 0
+		} else if (mainmusik == 4) {
+			musik4.volume = 0
+		} else if (mainmusik == 5) {
+			musik5.volume = 0
+		} else if (mainmusik == 6) {
+			musik6.volume = 0
+		}
+	})
+
+
+</script>
+</body>
+</html>

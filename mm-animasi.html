@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<style>
+	.flip-scale-2-hor-top {
+		-webkit-animation: flip-scale-2-hor-top 0.5s linear both;
+		    animation: flip-scale-2-hor-top 0.5s linear both;
+	}
+
+	@-webkit-keyframes flip-scale-2-hor-top {
+	  0% {
+	    -webkit-transform: translateY(0) rotateX(0) scale(1);
+	            transform: translateY(0) rotateX(0) scale(1);
+	    -webkit-transform-origin: 50% 0%;
+	            transform-origin: 50% 0%;
+	  }
+	  50% {
+	    -webkit-transform: translateY(-50%) rotateX(-90deg) scale(2);
+	            transform: translateY(-50%) rotateX(-90deg) scale(2);
+	    -webkit-transform-origin: 50% 50%;
+	            transform-origin: 50% 50%;
+	  }
+	  100% {
+	    -webkit-transform: translateY(-100%) rotateX(-180deg) scale(1);
+	            transform: translateY(-100%) rotateX(-180deg) scale(1);
+	    -webkit-transform-origin: 50% 100%;
+	            transform-origin: 50% 100%;
+	  }
+	}
+	@keyframes flip-scale-2-hor-top {
+	  0% {
+	    -webkit-transform: translateY(0) rotateX(0) scale(1);
+	            transform: translateY(0) rotateX(0) scale(1);
+	    -webkit-transform-origin: 50% 0%;
+	            transform-origin: 50% 0%;
+	  }
+	  50% {
+	    -webkit-transform: translateY(-50%) rotateX(-90deg) scale(2);
+	            transform: translateY(-50%) rotateX(-90deg) scale(2);
+	    -webkit-transform-origin: 50% 50%;
+	            transform-origin: 50% 50%;
+	  }
+	  100% {
+	    -webkit-transform: translateY(-100%) rotateX(-180deg) scale(1);
+	            transform: translateY(-100%) rotateX(-180deg) scale(1);
+	    -webkit-transform-origin: 50% 100%;
+	            transform-origin: 50% 100%;
+	  }
+	}
+
+	.swing-top-fwd {
+		-webkit-animation: swing-top-fwd 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+		        animation: swing-top-fwd 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	}
+
+	@-webkit-keyframes swing-top-fwd {
+	  0% {
+	    -webkit-transform: rotateX(0);
+	            transform: rotateX(0);
+	    -webkit-transform-origin: top;
+	            transform-origin: top;
+	  }
+	  100% {
+	    -webkit-transform: rotateX(180deg);
+	            transform: rotateX(180deg);
+	    -webkit-transform-origin: top;
+	            transform-origin: top;
+	  }
+	}
+	@keyframes swing-top-fwd {
+	  0% {
+	    -webkit-transform: rotateX(0);
+	            transform: rotateX(0);
+	    -webkit-transform-origin: top;
+	            transform-origin: top;
+	  }
+	  100% {
+	    -webkit-transform: rotateX(180deg);
+	            transform: rotateX(180deg);
+	    -webkit-transform-origin: top;
+	            transform-origin: top;
+	  }
+	}
+
+	.rotate-center {
+		-webkit-animation: rotate-center 0.6s ease-in-out both;
+		        animation: rotate-center 0.6s ease-in-out both;
+	}
+
+	@-webkit-keyframes rotate-center {
+	  0% {
+	    -webkit-transform: rotate(0);
+	            transform: rotate(0);
+	  }
+	  100% {
+	    -webkit-transform: rotate(360deg);
+	            transform: rotate(360deg);
+	  }
+	}
+	@keyframes rotate-center {
+	  0% {
+	    -webkit-transform: rotate(0);
+	            transform: rotate(0);
+	  }
+	  100% {
+	    -webkit-transform: rotate(360deg);
+	            transform: rotate(360deg);
+	  }
+	}
+
+
+	</style>
+</head>
+<body>
+
+	<ul class="topnav">
+	  <li><a href="mm-home.html">Home</a></li>
+	  <li><a href="mm-gambar.html">Multimedia Gambar</a></li>
+	  <li><a class="active" href="#">Multimedia Animasi</a></li>
+	  <li><a href="mm-audio.html">Multimedia Audio</a></li>
+	  <li><a href="mm-video.html">Multimedia Video</a></li>
+	  <li class="right"><a href="mm-video.html">Profil</a></li>
+	</ul>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-6" align="center">
+				<h3 style="text-align: center; font-weight: bold;">Gambar</h3>
+				<img src="Foto/motor1.png" id="gambarasli">
+			</div>
+			<div class="col-lg-6">
+				<h3 style="text-align: center; font-weight: bold;">Deskripsi</h3>
+				<p style="text-align: left; font-weight: bold; font-family: comic sans ms; font-style: italic; color:#ff0000; font-size: 13pt" id="kode"></p>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-3">
+        <div class="col">
+            <button id="flip" class="btn btn-primary btn-block">Flip Scale</button>
+        </div>
+        <div class="col">
+            <button id="swing" class="btn btn-success btn-block">Swing</button>
+        </div>
+        <div class="col">
+            <button id="rotate" class="btn btn-dark btn-block">Rotate</button>
+        </div>
+    </div>
+
+	
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+	let gambarasli = document.getElementById('gambarasli')
+	let flip = document.getElementById('flip')
+	let swing = document.getElementById('swing')
+	let rotate = document.getElementById('rotate')
+	let kode = document.getElementById('kode')
+
+	flip.addEventListener('click', () => {
+		gambarasli.className = 'flip-scale-2-hor-top'
+
+		setTimeout ( () => {
+			gambarasli.className = 'b'
+		}, 1000)
+
+		kode.innerText = `.flip-scale-2-hor-top {
+		-webkit-animation: flip-scale-2-hor-top 0.5s linear both;
+		    animation: flip-scale-2-hor-top 0.5s linear both;
+	}
+		@-webkit-keyframes flip-scale-2-hor-top {
+	  0% {
+	    -webkit-transform: translateY(0) rotateX(0) scale(1);
+	            transform: translateY(0) rotateX(0) scale(1);
+	    -webkit-transform-origin: 50% 0%;
+	            transform-origin: 50% 0%;
+	  }
+	  50% {
+	    -webkit-transform: translateY(-50%) rotateX(-90deg) scale(2);
+	            transform: translateY(-50%) rotateX(-90deg) scale(2);
+	    -webkit-transform-origin: 50% 50%;
+	            transform-origin: 50% 50%;
+	  }
+	  100% {
+	    -webkit-transform: translateY(-100%) rotateX(-180deg) scale(1);
+	            transform: translateY(-100%) rotateX(-180deg) scale(1);
+	    -webkit-transform-origin: 50% 100%;
+	            transform-origin: 50% 100%;
+	  }
+	}
+	@keyframes flip-scale-2-hor-top {
+	  0% {
+	    -webkit-transform: translateY(0) rotateX(0) scale(1);
+	            transform: translateY(0) rotateX(0) scale(1);
+	    -webkit-transform-origin: 50% 0%;
+	            transform-origin: 50% 0%;
+	  }
+	  50% {
+	    -webkit-transform: translateY(-50%) rotateX(-90deg) scale(2);
+	            transform: translateY(-50%) rotateX(-90deg) scale(2);
+	    -webkit-transform-origin: 50% 50%;
+	            transform-origin: 50% 50%;
+	  }
+	  100% {
+	    -webkit-transform: translateY(-100%) rotateX(-180deg) scale(1);
+	            transform: translateY(-100%) rotateX(-180deg) scale(1);
+	    -webkit-transform-origin: 50% 100%;
+	            transform-origin: 50% 100%;
+	  }
+	}`
+
+	})
+
+	swing.addEventListener('click', () => {
+		gambarasli.className = 'swing-top-fwd'
+
+		setTimeout ( () => {
+			gambarasli.className = 'b'
+		}, 1000)
+
+		kode.innerText = `.swing-top-fwd {
+		-webkit-animation: swing-top-fwd 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+		        animation: swing-top-fwd 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	}
+
+	@-webkit-keyframes swing-top-fwd {
+	  0% {
+	    -webkit-transform: rotateX(0);
+	            transform: rotateX(0);
+	    -webkit-transform-origin: top;
+	            transform-origin: top;
+	  }
+	  100% {
+	    -webkit-transform: rotateX(180deg);
+	            transform: rotateX(180deg);
+	    -webkit-transform-origin: top;
+	            transform-origin: top;
+	  }
+	}
+	@keyframes swing-top-fwd {
+	  0% {
+	    -webkit-transform: rotateX(0);
+	            transform: rotateX(0);
+	    -webkit-transform-origin: top;
+	            transform-origin: top;
+	  }
+	  100% {
+	    -webkit-transform: rotateX(180deg);
+	            transform: rotateX(180deg);
+	    -webkit-transform-origin: top;
+	            transform-origin: top;
+	  }
+	}`
+	})
+
+	rotate.addEventListener('click', () => {
+		gambarasli.className = 'rotate-center'
+
+		setTimeout ( () => {
+			gambarasli.className = 'b'
+		}, 1000)
+
+		kode.innerText = `.rotate-center {
+		-webkit-animation: rotate-center 0.6s ease-in-out both;
+		        animation: rotate-center 0.6s ease-in-out both;
+	}
+
+	@-webkit-keyframes rotate-center {
+	  0% {
+	    -webkit-transform: rotate(0);
+	            transform: rotate(0);
+	  }
+	  100% {
+	    -webkit-transform: rotate(360deg);
+	            transform: rotate(360deg);
+	  }
+	}
+	@keyframes rotate-center {
+	  0% {
+	    -webkit-transform: rotate(0);
+	            transform: rotate(0);
+	  }
+	  100% {
+	    -webkit-transform: rotate(360deg);
+	            transform: rotate(360deg);
+	  }
+	}`
+	})
+</script>
+</body>
+</html>

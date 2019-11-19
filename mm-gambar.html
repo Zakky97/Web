@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src=""></script>
+</head>
+<body>
+
+	<ul class="topnav">
+	  <li><a href="mm-home.html">Home</a></li>
+	  <li><a class="active" href="#">Multimedia Gambar</a></li>
+	  <li><a href="mm-animasi.html">Multimedia Animasi</a></li>
+	  <li><a href="mm-audio.html">Multimedia Audio</a></li>
+	  <li><a href="mm-video.html">Multimedia Video</a></li>
+	  <li class="right"><a href="mm-video.html">Profil</a></li>
+	</ul>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-4" align="center">
+				<h3 style="text-align: center; font-weight: bold;">Gambar Original</h3>
+				<img src="Foto/motor1.png" id="gambarasli">
+			</div>
+			<div class="col-4">
+				<h3 style="text-align: center; font-weight: bold;">Gambar + Filter</h3>
+				<canvas id="spacegambar"></canvas>
+			</div>
+			<div class="col-4">
+				<h3 style="text-align: center; font-weight: bold;">Deskripsi</h3>
+				<p style="text-align: left; font-weight: bold; font-family: comic sans ms; font-style: italic; color:#ff0000; font-size: 13pt" id="kode"></p>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-3">
+        <div class="col">
+            <button id="grayscale" class="btn btn-primary btn-block">Grayscale</button>
+        </div>
+        <div class="col">
+            <button id="sepia" class="btn btn-success btn-block">Sepia</button>
+        </div>
+        <div class="col">
+            <button id="saturation" class="btn btn-dark btn-block">Saturation</button>
+        </div>
+    </div>
+
+	
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	let gambarasli = document.getElementById('gambarasli')
+	let spacegambar = document.getElementById('spacegambar')
+	let grayscale = document.getElementById('grayscale')
+	let sepia = document.getElementById('sepia')
+	let saturation = document.getElementById('saturation')
+	let kode = document.getElementById('kode')
+	let filter = {};
+
+	filter.ambilgambar = function(img) {
+
+	  var c = document.createElement('canvas');
+	      c.width = img.width;
+	      c.height = img.height;
+
+	  var ctx = c.getContext('2d');
+	      ctx.drawImage(img, 0, 0);
+
+	  return ctx.getImageData(0, 0, img.width, img.height);
+	};
+
+	filter.printCanvas = function(selector, idata) {
+
+	  selector.width = idata.width;
+	  selector.height = idata.height;
+
+	  var ctx = selector.getContext('2d');
+	  ctx.putImageData(idata, 0, 0);
+
+	};
+
+	filter.filtergambar = function(selector, filter, image) {
+
+	  var args = [this.ambilgambar(image)];
+
+	  return this.printCanvas(selector, filter.apply(null, args));
+	};
+
+	filter.grayscale = function(pixels) {
+	  for (var i = 0; i < pixels.data.length; i += 4) {
+	    var r = pixels.data[i],
+	      g = pixels.data[i+1],
+	      b = pixels.data[i+2]
+
+	    pixels.data[i] = pixels.data[i+1] = pixels.data[i+2] = 0.2126*r + 0.7152*g + 0.0722*b
+	  }
+
+	  return pixels
+	}
+
+	filter.sepia = function(pixels) {
+	  for (var i = 0; i < pixels.data.length; i += 4) {
+	    var r = pixels.data[i],
+	      g = pixels.data[i+1],
+	      b = pixels.data[i+2]
+
+	    pixels.data[i] = pixels.data[i+1] = pixels.data[i+2] = 0.3*r + 0.59*g + 0.11*b
+
+	    pixels.data[i] += 40
+	    pixels.data[i+1] += 20
+	    pixels.data[i+2] -= 20
+	  }
+
+	  return pixels
+	}
+
+	filter.blue = function(pixels) {
+	  var d = pixels.data
+
+	  for (var i = 0; i < d.length; i += 4) {
+	    d[i] = 0
+	    d[i+1] = 0
+	  }
+
+	  return pixels
+	}
+
+	grayscale.addEventListener('click', function() {
+		let efek = filter.grayscale
+		filter.filtergambar(spacegambar, efek, gambarasli)
+		kode.innerText = `for (var i = 0; i < pixels.data.length; i += 4) {
+	    var r = pixels.data[i],
+	      g = pixels.data[i+1],
+	      b = pixels.data[i+2]
+
+	    pixels.data[i] = pixels.data[i+1] = pixels.data[i+2] = 0.2126*r + 0.7152*g + 0.0722*b
+	  }
+
+	  return pixels`
+	})
+
+	sepia.addEventListener('click', function() {
+		let efek = filter.sepia
+		filter.filtergambar(spacegambar, efek, gambarasli)
+		kode.innerText = `for (var i = 0; i < pixels.data.length; i += 4) {
+	    var r = pixels.data[i],
+	      g = pixels.data[i+1],
+	      b = pixels.data[i+2]
+
+	    pixels.data[i] = pixels.data[i+1] = pixels.data[i+2] = 0.3*r + 0.59*g + 0.11*b
+
+	    pixels.data[i] += 40
+	    pixels.data[i+1] += 20
+	    pixels.data[i+2] -= 20
+	  }
+
+	  return pixels`
+	})
+
+	saturation.addEventListener('click', function() {
+		let efek = filter.blue
+		filter.filtergambar(spacegambar, efek, gambarasli)
+		kode.innerText = `var d = pixels.data
+
+	  for (var i = 0; i < d.length; i += 4) {
+	    d[i] = 0
+	    d[i+1] = 0
+	  }
+
+	  return pixels`
+	})
+</script>
+</body>
+</html>
